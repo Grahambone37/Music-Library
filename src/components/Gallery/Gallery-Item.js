@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
 export default function GalleryItem() {
-    //View
+    let [view, setView] = useState(false)
 
     return (
-        <div>
-
+        <div onClick={() => setView(!view)} style={{'display': 'inline-block'}}>
+            <h3>Gallery Item</h3>
         </div>
     )
 }
