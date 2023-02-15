@@ -3,11 +3,15 @@ import GalleryItem from './Gallery-Item'
 
 export default function Gallery(props) {
 
+    const display = props.data.map((item, index) => {
+        return (
+            <GalleryItem item={item} key={index} />
+        )
+    })
 
     return (
         <div>
-            <h2>Gallery Index</h2>
-            <GalleryItem />
+            {display}
         </div>
     )
 }
