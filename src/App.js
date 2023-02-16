@@ -1,8 +1,12 @@
 import './App.css';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import Searchbar from './components/Searchbar';
 import Gallery from './components/Gallery/Gallery-Index';
+
+import ArtistView from './components/ArtistView';
+import AlbumView from './components/AlbumView';
 
 function App() {
   let [search, setSearch] = useState('')
@@ -18,8 +22,10 @@ function App() {
         const response = await fetch(API_URL + search)
         const resData = await response.json()
         if (resData.results.length > 0) {
+          setMessage('')
           setData(resData.results)
         } else {
+          setData([])
           setMessage('Not Found')
         }
       }
@@ -34,9 +40,22 @@ function App() {
 
   return (
     <div className="App">
-      <Searchbar handleSearch={handleSearch} />
-      {message}
-      <Gallery data={data} />
+      <Router>
+        <div>
+          <Link to="/">Home</Link>
+        </div>
+        {message}
+        <Routes>
+          <Route path="/" element={
+            <Fragment>
+              <Searchbar handleSearch={handleSearch} />
+              <Gallery data={data} />
+            </Fragment>
+          } />
+          <Route path="/album/:id" element={<AlbumView />} />
+          <Route path="/artist/:id" element={<ArtistView />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
