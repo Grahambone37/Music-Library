@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect, Fragment } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Searchbar from './components/Searchbar';
 import Gallery from './components/Gallery/Gallery-Index';
@@ -41,9 +41,6 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <div>
-          <Link to="/">Home</Link>
-        </div>
         {message}
         <Routes>
           <Route path="/" element={
